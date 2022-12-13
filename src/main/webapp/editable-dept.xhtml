@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui">
+<h:head></h:head>
+<h:body>
+	<h:form id="form">
+		<p:panel>
+			<p:dataTable value="#{mbDept.deptTable}" var="e" editable="true" editMode="cell">
+			
+			
+				<f:facet name="header">
+					<h:outputText value="Department" />
+				</f:facet>
+
+
+				<p:column headerText="Dept Id" sortBy="#{e.id}">
+					<h:outputText value="#{e.id}" />
+				</p:column>
+
+				<p:column headerText="Dept Name" sortBy="#{e.name}">
+					<p:cellEditor>
+						<f:facet name="output">
+							<h:outputText value="#{e.name}" />
+						</f:facet>
+						<f:facet name="input">
+							<h:inputText value="#{e.name}" />
+						</f:facet>
+					</p:cellEditor>
+				</p:column>
+
+				<p:column headerText="Dept Location" sortBy="#{e.location}">
+					<p:cellEditor>
+						<f:facet name="output">
+							<h:outputText value="#{e.location}" />
+						</f:facet>
+						<f:facet name="input">
+							<h:inputText value="#{e.location}" />
+						</f:facet>
+					</p:cellEditor>
+				</p:column>
+
+
+				<p:column headerText="Save">
+					<p:commandButton value="Save" ajax="false">
+						<f:setPropertyActionListener value="#{e}" target="#{mbDept.selectedDept}" />
+					</p:commandButton>
+				</p:column>
+
+				<f:facet name="footer">
+					<h:outputText value="In total there are #{mbDept.deptTable.size()} department" />
+					<p:commandButton value="Save" action="#{mbDept.updateDept()}" ajax="false" />
+				</f:facet>
+				
+				
+			</p:dataTable>
+		</p:panel>
+	</h:form>
+</h:body>
+</html>
